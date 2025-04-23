@@ -1,17 +1,40 @@
 import tkinter as tk
 
+
+    
+    
+
 def funcionPolinomica():
     limpiarVentana()
-    label=tk.Label(ventana, text="Función Polinómica", font=("Arial", 20, "bold"))
+    label=tk.Label(ventana, text="Función Polinómica", font=("Arial", 20, "bold"), bg="skyblue")
     label.pack(pady=20)
-    label=tk.Label(ventana, text="Ingresar el grado del polinomio", font=("Arial", 18))
-    label.pack(pady=10)
-    botonP1 = tk.Button(ventana, text="1", font=("Arial", 16, "bold"), width=5)
-    botonP1.pack(pady=20)
-    botonP2 = tk.Button(ventana, text="2", font=("Arial", 16, "bold"), width=5)
-    botonP2.pack(pady=10)
-    botonP3 = tk.Button(ventana, text="3", font=("Arial", 16, "bold"), width=5)
-    botonP3.pack(pady=10)
+    label=tk.Label(ventana, text="Ingresar el grado del polinomio", font=("Arial", 18), bg="skyblue")
+    label.pack(pady=20)
+    campo1=tk.Entry(ventana)
+    campo1.pack(pady=10)
+    
+    def funcionPolinomica2():
+        grado=int(campo1.get())
+        limpiarVentana()
+        label=tk.Label(ventana, text="Función Polinómica", font=("Arial", 20, "bold"), bg="skyblue")
+        label.pack(pady=20)
+        
+        
+        polinomio=list()
+        i=grado
+        for i in range(i,-1,-1):
+            label=tk.Label(ventana, text=f"Ingresar el termino de {i}", font=("Arial", 18), bg="skyblue")
+            label.pack(pady=5)
+            campo2=tk.Entry(ventana)
+            campo2.pack(pady=5)
+            
+
+
+        botonVolver = tk.Button(ventana, text="Volver", font=("Arial", 12), width=20, command=mostrarOpcion1)
+        botonVolver.pack(pady=50)
+    botonOK = tk.Button(ventana, text="OK", font=("Arial", 8),width=5, command=funcionPolinomica2)
+    botonOK.pack(pady=10)
+    
 
 
     botonVolver = tk.Button(ventana, text="Volver", font=("Arial", 12), width=20, command=mostrarOpcion1)
@@ -41,9 +64,9 @@ def funcionExponencial():
 
 def mostrarOpcion1():
     limpiarVentana()
-    label=tk.Label(ventana, text="Graficar función", font=("Arial", 20, "bold"))
+    label=tk.Label(ventana, text="Graficar función", font=("Arial", 20, "bold"), bg="skyblue")
     label.pack(pady=20)
-    label=tk.Label(ventana, text="Ingresar función deseada", font=("Arial", 18))
+    label=tk.Label(ventana, text="Ingresar función deseada", font=("Arial", 18), bg="skyblue")
     label.pack(pady=10)
     botonP = tk.Button(ventana, text="Función Polinómica", font=("Arial", 12),width=20, command=funcionPolinomica)
     botonP.pack(pady=10)
@@ -74,7 +97,7 @@ def limpiarVentana():
 
 def mostrarMenu():
     limpiarVentana()
-    label=tk.Label(ventana, text="Eliga la opción deseada", font=("Arial", 20, "bold"))
+    label=tk.Label(ventana, text="Eliga la opción deseada", font=("Arial", 20, "bold"), bg="skyblue")
     label.pack(pady=20)
     
     boton1=tk.Button(ventana, text="Graficar función",font=("Arial",14), width=40, command=mostrarOpcion1)
@@ -90,6 +113,7 @@ def main():
     ventana = tk.Tk()
     ventana.geometry ("600x500")
     ventana.title("Graficador de funciones")
+    ventana.configure(bg="skyblue")
 
     mostrarMenu()
 
