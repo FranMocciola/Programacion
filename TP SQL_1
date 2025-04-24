@@ -1,0 +1,28 @@
+CREATE DATABASE libreria
+CREATE TABLE autor (
+  idAutor  INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(100) NOT NULL,
+  nacionalidad VARCHAR(100) NOT NULL
+);
+CREATE TABLE libro (
+  idLibro INT AUTO_INCREMENT PRIMARY KEY,
+  titulo VARCHAR (100) NOT NULL,
+  genero VARCHAR (50) NOT NULL,
+  idAutor INT,
+  FOREIGN KEY (idAutor) REFERENCES autor(idAutor) ON DELETE SET NULL
+);
+
+INSERT INTO autor(nombre, nacionalidad)
+VALUES
+("Rick Riordan", "estadounidense"),
+("J.K.Rowling","inglesa"),
+("Edgar Alan Poe", "estadounidense"),
+("Jorge Luis Borges", "argentino"),
+("Suzanne Collins", "estadounidense");
+INSERT INTO libro(titulo, genero, idAutor)
+VALUES
+("Juegos Del hambre", "Ciencia Ficcion", 5),
+("Percy Jackson", "Fantasía",1),
+("Harry Potter", "Fantasía", 2),
+("La Biblioteca de Babel", "Ficción", 4),
+("El gato negro", "Terror",3);
