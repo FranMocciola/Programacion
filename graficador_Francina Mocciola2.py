@@ -1,7 +1,21 @@
 import tkinter as tk
+from urllib.request import urlopen  
+from PIL import Image, ImageTk 
+from io import BytesIO  
 
+def descargarPortada():
+    urlImagen = "https://github.com/FranMocciola/Programacion/blob/main/Portada%20Graficador%20de%20funciones.png?raw=true"
+    datosImagen = urlopen(urlImagen)
+    imagenBinaria = datosImagen.read()  
+    imagen = Image.open(BytesIO(imagenBinaria))
+    return imagen
 
-    
+def descargarFondo2():
+    urlImagen = "https://github.com/FranMocciola/Programacion/blob/main/Fondo2%20Graficador%20de%20funciones.png?raw=true"
+    datosImagen = urlopen(urlImagen)
+    imagenBinaria = datosImagen.read()  
+    imagen = Image.open(BytesIO(imagenBinaria))
+    return imagen
     
 
 def funcionPolinomica():
@@ -82,6 +96,7 @@ def mostrarOpcion2():
     limpiarVentana()
     label=tk.Label(ventana, text="Graficar puntos específicos sobre la función", font=("Arial", 20, "bold"),fg="white", bg="skyblue")
     label.pack(pady=20)
+    
 def mostrarOpcion3():
     limpiarVentana()
     label=tk.Label(ventana, text="Encontrar raíces aproximadas de la función", font=("Arial", 20, "bold"),fg="white", bg="skyblue")
@@ -89,14 +104,16 @@ def mostrarOpcion3():
   
 
     
-
-
 def limpiarVentana():
     for widget in ventana.winfo_children():
         widget.destroy()
+    eFondo=tk.Label(ventana, image=fondoTk)
+    eFondo.pack()
 
 def mostrarMenu():
     limpiarVentana()
+    fondo2=descargarFondo2()
+    fondo2Redimensionado=fondo2.resize((ancho, alto), Image.Resampling.LANCZOS)
     label=tk.Label(ventana, text="Eliga la opción deseada", font=("Arial", 20, "bold"),fg="white", bg="skyblue")
     label.pack(pady=20)
     
@@ -106,16 +123,45 @@ def mostrarMenu():
     boton2.pack(pady=10)
     boton3=tk.Button(ventana, text="Encontrar raíces aproximadas de la función",font=("Courier New",12,"bold"), width=50,bg="#334257",fg="white", command=mostrarOpcion3)
     boton3.pack(pady=10)
-   
+
+def mostrarInicio():
+    ePortada=tk.Label(ventana, image=portadaTk)
+    ePortada.pack()
+    botonComenzar=tk.Button(ventana, text="COMENZAR",font=("Courier New",10,"bold"), width=20,bg="#334257",fg="white", command=mostrarMenu)
+    boton1.pack(pady=10)
+    
     
 def main():
     global ventana
+    global portada
+    global fondo
+    
     ventana = tk.Tk()
-    ventana.geometry ("600x500")
+    ancho = ventana.winfo_screenwidth()  
+    alto = ventana.winfo_screenheight()  
+    ventana.geometry(f"{ancho}x{alto}")
     ventana.title("Graficador de funciones")
-    ventana.configure(bg="skyblue")
 
-    mostrarMenu()
+
+
+
+
+    portada=descargarPortada()
+    portadaRedimensionada=portada.resize((ancho, alto), Image.Resampling.LANCZOS)
+    portadaTk=ImageTk.PhotoImage(portadaRedimensionada)
+
+    fondoTk=ImageTk.PhotoImage(fondoRedimensionado)
+
+    fondo=descargarFondo2()
+    
+    fondoRedimensionado=fondo.resize((ancho, alto), Image.Resampling.LANCZOS)
+
+    
+    mostrarInicio()
+    
+    
+    
+    
 
     
 
