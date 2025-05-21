@@ -25,6 +25,8 @@ def graficarFuncionPolinomica():
 
 
 def funcionPolinomica():
+    polinomio=list()
+    i=0
     def leerGrado():
         grado=int (campo1.get())
         funcionPolinomica2(grado)
@@ -41,18 +43,18 @@ def funcionPolinomica():
     
    
     def funcionPolinomica2(grado):
+        nonlocal polinomio, i
+        i=grado
+        polinomio=[0]*(grado+1)
         def leer ():
             polinomio[i]=float(campo2.get())
-            i-=1
-            funcionPolinomica2(i)
         limpiarVentana()
         label=tk.Label(ventana, text="Función Polinómica", font=("Arial", 50, "bold"),fg="white", bg="#212934")
         label.place(x=400,y=75)
         
         
-        polinomio=list()
-        i=grado
-        if i>=0:
+        ##########     
+        for i in range (grado,-1):
             label=tk.Label(ventana, text=f"Ingresar el termino del exponente {i}", font=("Times New Roman", 30),fg="white", bg="#212934")
             label.place(x=450, y=300)
             campo2=tk.Entry(ventana)
@@ -60,6 +62,8 @@ def funcionPolinomica():
         
             botonOK = tk.Button(ventana, text="OK", font=("Arial",20,"bold"),width=8,bg="#334257",fg="white", command=leer)
             botonOK.place(x=635, y=550)
+
+            label.destroy()
 
         botonVolver = tk.Button(ventana, text="Volver", font=("Times New Roman",15,"bold"), width=18,bg="white", fg="black", command=mostrarOpcion1)
         botonVolver.place(x=600,y=750)
